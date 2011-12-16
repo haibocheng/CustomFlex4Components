@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:components="com.newtriks.components.*"
+               width="800"
+               height="550">
+    <fx:Metadata>
+        [ResourceBundle("assets")]
+    </fx:Metadata>
+    <s:layout>
+        <s:VerticalLayout
+            paddingTop="10"
+            paddingBottom="10"
+            paddingLeft="10"
+            paddingRight="10"/>
+    </s:layout>
+    <components:IconToggleButton
+            id="toggle_btn"
+            text="{resourceManager.getString('assets','toggle.button.label')}"
+            toggleText="{resourceManager.getString('assets','toggled.button.label')}"
+            toolTip="{resourceManager.getString('assets','toggle.button.tip')}"
+            icon="{resourceManager.getClass('assets','icon.off')}"
+            toggleIcon="{resourceManager.getClass('assets','icon.on')}"
+            canToggle="true"
+            skinClass="com.newtriks.components.skins.IconToggleButtonSkin"/>
+</s:Application>
