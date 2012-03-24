@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark">
+    <fx:Metadata>
+        [HostComponent("com.newtriks.components.SlideDisplay")]
+    </fx:Metadata>
+    <s:states>
+        <s:State name="disabled"/>
+        <s:State name="invalid"/>
+        <s:State name="ready"/>
+        <s:State name="loading"/>
+        <s:State name="uninitialized"/>
+    </s:states>
+    <!--- Defines the appearance of the image background. -->
+    <s:Rect id="background" left="0" right="0" top="0" bottom="0">
+        <s:stroke>
+            <s:SolidColorStroke caps="none" color="0xececec" joints="miter" miterLimit="4" weight="0.5"/>
+        </s:stroke>
+    </s:Rect>
+    <!--- Primary image display skin part. -->
+    <s:BitmapImage id="imageDisplay" left="1" top="1" right="1" bottom="1"/>
+
+    <!--- Progress indicator skin part. -->
+    <s:Range id="progressIndicator" skinClass="spark.skins.spark.ImageLoadingSkin" verticalCenter="0"
+             horizontalCenter="0" includeIn="loading" layoutDirection="ltr"/>
+
+    <!--- Icon that appears in place of the image when an invalid image is loaded. -->
+    <s:BitmapImage id="brokenImageIcon" includeIn="invalid" source="@Embed(source='Assets.swf',symbol='__brokenImage')"
+                   verticalCenter="0" horizontalCenter="0"/>
+
+    <!--- Cheeky image to hold next slide, simple cache mechanism -->
+    <s:Image id="nextSlideCachedImage"
+             includeInLayout="false"
+             contentLoader="{hostComponent.contentLoader}"
+             source="{hostComponent.nextSlideURL}"
+             width="10"
+             height="10"
+             visible="false"
+             enableLoadingState="false"
+             scaleMode="{hostComponent.scaleMode}"
+             smoothingQuality="{hostComponent.getStyle('smoothingQuality')}"
+             smooth="{hostComponent.smooth}"/>
+</s:Skin>

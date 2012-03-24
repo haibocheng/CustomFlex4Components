@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<s:Image xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:fx="http://ns.adobe.com/mxml/2009"
+         skinClass="com.newtriks.components.skins.SlideDisplaySkin"
+         horizontalCenter="0"
+         verticalCenter="0"
+         enableLoadingState="false"
+         scaleMode="letterbox"
+         smoothingQuality="high"
+         smooth="true">
+    <fx:Script><![CDATA[
+        import spark.core.ContentCache;
+        import spark.core.IContentLoader;
+
+        [Bindable]
+        public var nextSlideURL:String;
+
+        private var _slideCache:Array;
+
+        public function clearCache():void {
+            _slideCache = [];
+        }
+
+        public function setSourceContent(currentSlideURL:String, nextSlideURL:String, contentLoader:IContentLoader):void {
+            if (this.contentLoader != contentLoader) {
+                this.contentLoader = contentLoader as ContentCache;
+            }
+            this.source = currentSlideURL;
+            cacheNextSlide(nextSlideURL);
+        }
+
+        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
+            this.width = parent.width;
+            this.height = parent.height;
+        }
+
+        private function cacheNextSlide(url:String):void {
+            if (url.length < 1) return;
+            for each(var iURL:String in _slideCache) {
+                if (url == iURL) return;
+            }
+            _slideCache.push(url);
+            nextSlideURL = url;
+        }
+        ]]></fx:Script>
+</s:Image>
