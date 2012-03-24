@@ -15,6 +15,16 @@
         [Bindable]
         public var nextSlideURL:String;
 
+        private var _autoLayout:Boolean = true;
+        public function get autoLayout():Boolean {
+            return _autoLayout;
+        }
+
+        public function set autoLayout(value:Boolean):void {
+            if (_autoLayout == value) return;
+            _autoLayout = value;
+        }
+
         private var _slideCache:Array;
 
         public function clearCache():void {
@@ -31,6 +41,7 @@
 
         override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
             super.updateDisplayList(unscaledWidth, unscaledHeight);
+            if (!autoLayout) return;
             this.width = parent.width;
             this.height = parent.height;
         }
