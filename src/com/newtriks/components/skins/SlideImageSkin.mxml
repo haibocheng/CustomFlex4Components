@@ -31,13 +31,23 @@
     <!--- Cheeky image to hold next slide, simple cache mechanism -->
     <s:Image id="nextSlideCachedImage"
              includeInLayout="false"
-             contentLoader="{hostComponent.contentLoader}"
              source="{hostComponent.nextSlideURL}"
              width="10"
              height="10"
              visible="false"
              enableLoadingState="false"
-             scaleMode="{hostComponent.scaleMode}"
-             smoothingQuality="{hostComponent.getStyle('smoothingQuality')}"
-             smooth="{hostComponent.smooth}"/>
+             smoothingQuality="{hostComponent.getStyle('smoothingQuality')}"/>
+    <fx:Script><![CDATA[
+        override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+            if (hostComponent) {
+                if (hostComponent.contentLoader)
+                    nextSlideCachedImage.contentLoader = hostComponent.contentLoader;
+                if (hostComponent.scaleMode)
+                    nextSlideCachedImage.scaleMode = hostComponent.scaleMode;
+                if (hostComponent.smooth)
+                    nextSlideCachedImage.smooth = hostComponent.smooth;
+            }
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
+        }
+        ]]></fx:Script>
 </s:Skin>
